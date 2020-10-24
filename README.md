@@ -1,1 +1,1 @@
-# DH2020-Art-of-Recyling
+# DH2020-Art-of-Recycling
