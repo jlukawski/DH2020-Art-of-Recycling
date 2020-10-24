@@ -13,11 +13,20 @@ class Recycle_tip:
 #link the project ideas
 import New_recycle_entry
 class Art_project:
-  def __init__(self,title,description,required_bags,required_candy_wrappers):
+  def __init__(self,title,required_material):
     self.title = title
-    self.description = description
-    self.required_bags = required_bags
-    self.required_candy_wrappers = required_candy_wrappers
+    self.required_bags = required_material
+    file = open("art_project.txt", "r")
+    project = [] 
+    line = file.readline().strip("\n")
+    while line:
+      project.append(list(line.split(",")))
+      line = file.readline().strip("\n")
+    file.close()
+    project.sort(key = lambda x: x[1])
+    for i in range (len(project)):
+      if title == project[i][1] and required_material >= int(project[i][0]):
+        print(project[i][2])
   
     
 #home page
