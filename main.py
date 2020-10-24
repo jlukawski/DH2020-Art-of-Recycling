@@ -6,7 +6,44 @@
 class Recycle_tip:
   def __init__():
 
-    
+import sqlite3
+conn = sqlite3.connect('database')
+conn.execute('''CREATE TABLE recyclable
+  (CREATE TABLE BOTTLE
+  (ID INT PRIMARY KEY NOT NULL,
+  Name TEXT NOT NULL,
+  Quantity INT NOT NULL,
+  Art CHAR(50));,
+  CREATE TABLE WRAPPER
+  (ID INT PRIMARY KEY NOT NULL,
+  Name TEXT NOT NULL,
+  Quantity INT NOT NULL,
+  Art CHAR(50));,
+  CREATE TABLE BUBBLE_WRAP
+  (ID INT PRIMARY KEY NOT NULL,
+  Name TEXT NOT NULL,
+  Quantity INT NOT NULL,
+  Art CHAR(50));)''')
+conn.execute("INSERT INTO BOTTLE(ID,Name,Quantity,Art)\
+  VALUES (1, 'bottle', 50, 'mushroom garden')");
+conn.execute("INSERT INTO WRAPPER(ID,Name,Quantity,Art) \
+  VALUES (2, 'small wrapper', 5, 'bracelet')");
+conn.execute("INSERT INTO WRAPPER(ID,Name,Quantity,Art) \
+  VALUES (3, 'medium wrapper', 2, 'corn purse' )");
+conn.execute("INSERT INTO BUBBLE_WRAP (ID,Name,Quantity,Art) \
+   VALUES (4, 'bubble wrap', 2, 'decorative cloud' )");
+
+print('Records recorded successfully')
+conn.commit()
+print('Total number of rows deleted:', conn.total_changes)
+cursor=conn.execute("SELECT Id, Name, Quantity, Art from recyclable")
+for row in cursor:
+  print('ID:', row[0])
+  print('Name:', row[1])
+  print('Quantity:', row[2])
+  print('Art:', row[3])
+print('opperations done successfully')
+conn.close()
 #store amount of reusable materials
 #import new_recycle_entry to get the amount of reusable items
 #text file to store info
