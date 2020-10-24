@@ -4,7 +4,17 @@
 #instagram-style through swift
 #method to add tips
 class Recycle_tip:
-  def __init__():
+  def __init__(self):
+    tips = []
+    f = open("Recycling_Tips.txt", "r")
+    line = f.readline()
+    while line:
+      tips.append(line)
+      line=f.readline()
+    f.close()
+    for tip in tips:
+      print(tip)
+
 
     
 #store amount of reusable materials
