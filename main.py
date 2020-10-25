@@ -48,9 +48,8 @@ conn.execute(string1)
 conn.commit
  
 class Art_project:
-  def __init__(self,reusable,required_material):
+  def __init__(self,reusable):
     self.reusable = reusable
-    self.required_bags = required_material
     file = open("crafts.txt", "r")
     project = [] 
     line = file.readline().strip("\n")
@@ -61,64 +60,76 @@ class Art_project:
     project.sort()
     for i in range (len(reusable)):
       for j in range (len(project)):
-        if reusable[i][0] == project[j][1] and reusable[i][1] == project[j][2] and required_material >= int(project[j][0]):
+        if reusable[i][0] == project[j][1] and reusable[i][1] == project[j][2] and reusable[i][2] >= int(project[j][0]):
           print(project[j][3]+ ' ' + project[j][4])
 
 
 class New_recycle_entry:
   global reusable
   def __init__(self,action):
-    print("1: aluminum")
-    print("2: cardboard")
-    print("3: glass")
-    print("4: plastic")
-    user = int(input("Choose your option: "))
-    if(user == 1):
-      button1 = "aluminum"
-    elif(user ==2):
-      button1 = "cardboard"
-    elif(user == 3):
-      button1 = "glass"
-    elif(user == 4):
-      button1 = "plastic"
+    user =0
+    while user != 5:
+      print("1: aluminum")
+      print("2: cardboard")
+      print("3: glass")
+      print("4: plastic")
+      print("5: cancel")
+      user = int(input("Choose your option: "))
+      if(user == 1):
+        button1 = "aluminum"
+      elif(user ==2):
+        button1 = "cardboard"
+      elif(user == 3):
+        button1 = "glass"
+      elif(user == 4):
+        button1 = "plastic"
+      elif(user == 5):
+        return;
+      if action == 'reuse':
+        print("1: wrapper")
+        print("2: bag")
+        print("3: bottle")
+        print("4: can")
+        print("5: jar")
+        print("6: carton")
+        print("7: box")
+        print("8: utensil")
 
-    if action == 'reuse':
-      print("1: wrapper")
-      print("2: bag")
-      print("3: bottle")
-      print("4: can")
-      print("5: jar")
-      print("6: carton")
-      print("7: box")
-      print("8: utensil")
+        print("Choose your option: ")
+        button2 = int(input())
+        if(button1 == "plastics"):
+          if (button2 == 1):
+            reusable[0][2] += 1
+          elif (button2 == 2):
+            reusable[1][2] += 1
+          elif (button2 == 3):
+            reusable[2][2] += 1
+          elif (button2 == 6):
+            reusable[3][2] += 1
+          elif (button2 == 8):
+            reusable[4][2] += 1
+          else:
+            print("not possible")
 
-      print("Choose your option: ")
-      button2 = int(input())
-      if(button1 == "plastics"):
-        if (button2 == 1):
-          reusable[0][2] += 1
-        elif (button2 == 2):
-          reusable[1][2] += 1
-        elif (button2 == 3):
-          reusable[2][2] += 1
-        elif (button2 == 6):
-          reusable[3][2] += 1
-        elif (button2 == 8):
-          reusable[4][2] += 1
-
-      elif(button1 == "aluminum"):
-        if (button2 == 4):
-          reusable[5][2] += 1
+        elif(button1 == "aluminum"):
+          if (button2 == 4):
+            reusable[5][2] += 1
+          else:
+            print("not possible")
       
-      elif(button1 == "glass"):
-        if (button2 == 4):
-          reusable[6][2] += 1
-        elif (button2 == 4):
-          reusable[7][2] += 1
+        elif(button1 == "glass"):
+          if (button2 == 4):
+            reusable[6][2] += 1
+          elif (button2 == 4):
+            reusable[7][2] += 1
+          else:
+            print("not possible")
 
-      elif(button1 == "cardboard"):
-        if(button2 == 7):
-          reusable[8][2] +=1
+        elif(button1 == "cardboard"):
+          if(button2 == 7):
+            reusable[8][2] +=1
+          else:
+            print("not possible")
 
     if action == 'recycle':
       check = 0
@@ -172,11 +183,10 @@ def main():
     else:  
       conn.execute("INSERT INTO Customer(email_ID,Name) \ VALUES ("+ Customer_email + ", " + Name +")");
   
-  action = input("Do you want to reuse, recycle, or check recyclable?")
+  action = input("Do you want to reuse, recycle, or check recyclable? ")
   New_recycle_entry(action)
 
-  Art_project(reusable,50)
-  Art_project(reusable, 2)
+  Art_project(reusable)
   
 if __name__ == "__main__":
   main()
