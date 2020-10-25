@@ -8,8 +8,8 @@ Python function features:
 - Give recycling tips to the user
 
 App implementation: 
-- iOS application with GUI
+- iOS application with tabbed GUI
 - Track amount of reusables collected
-- Suggested art projects, filtered by user's items
-- Give recycling tips to the user
-- Brandable app name with logo
+- Suggested art projects, filtered by user's items, with WebKit interface
+- Page with list of recycling tips
+- User-friendly and brandable app name with logo
