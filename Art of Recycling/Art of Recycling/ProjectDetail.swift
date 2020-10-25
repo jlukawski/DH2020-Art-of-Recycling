@@ -8,22 +8,23 @@
 
 import SwiftUI
 
+
 struct ProjectDetail: View {
+    var url: String
     var body: some View {
         VStack {
-            Button(action: {
-                
-            }){
-                Text("I made it!")
-                    .padding()
-            }
-            WebView(url: "https://www.google.com")
-        }
+            WebView(url: url)
+        }.navigationBarItems(trailing: Button(action: {}, label: {Text("I made it!")}))
+        
     }
 }
 
 struct ProjectDetail_Previews: PreviewProvider {
+    @Binding var projectcount: Int
     static var previews: some View {
-        ProjectDetail()
+        ProjectDetail(url: "https://www.google.com")
     }
 }
+
+
+//self.projectcount += 1
