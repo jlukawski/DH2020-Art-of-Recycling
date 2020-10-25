@@ -1,0 +1,12 @@
+Candy Wrapper, 0
+Plastic Bag, 0
+Soda Bottle, 0
+Soda Cans, 0
+Glass Jars, 0
+Steel Can, 0
+Water Bottle, 0
+Wine Bottle, 0
+Lotion Bottle, 0
+Drink Carton, 0
+Cardboard Box, 0
+Plastic Spoon, 0
