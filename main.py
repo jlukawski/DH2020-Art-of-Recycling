@@ -47,10 +47,9 @@ string1 = '''CREATE TABLE IF NOT EXISTS Recycling_Customer(
 conn.execute(string1)
 conn.commit
  
-
 class Art_project:
-  def __init__(self,title,required_material):
-    self.title = title
+  def __init__(self,reusable,required_material):
+    self.reusable = reusable
     self.required_bags = required_material
     file = open("crafts.txt", "r")
     project = [] 
@@ -59,22 +58,21 @@ class Art_project:
       project.append(list(line.split(",")))
       line = file.readline().strip("\n")
     file.close()
-    project.sort(key = lambda x: x[1])
-    for i in range (len(project)):
-      if title == project[i][1] and required_material >= int(project[i][0]):
-        print(project[i][2]+ ' ' + project[i][3])
+    project.sort()
+    for i in range (len(reusable)):
+      for j in range (len(project)):
+        if reusable[i][0] == project[j][1] and reusable[i][1] == project[j][2] and required_material >= int(project[j][0]):
+          print(project[j][3]+ ' ' + project[j][4])
 
 
 class New_recycle_entry:
   global reusable
   def __init__(self,action):
-    user = int(input())
-    button1 = ""
     print("1: aluminum")
     print("2: cardboard")
     print("3: glass")
     print("4: plastic")
-    print("Choose your option: ")
+    user = int(input("Choose your option: "))
     if(user == 1):
       button1 = "aluminum"
     elif(user ==2):
@@ -166,12 +164,7 @@ reusable = [["plastic", "wrapper", 0],["plastic", "bag", 0], ["plastic", "bottle
 def main():
   Customer_email = str(input())
   Name = input()
-  #string3= "SELECT customer_id, email_ID, Name from Customer where email_ID = " + Customer_email
-  #print(string3)
   cursor = conn.execute("SELECT customer_id, email_ID, Name from Customer")
-  #result = cursor.fetchone()
-  #print(result)
-  #cursor=conn.execute("SELECT Id, Name, Address, Salary from COMPANY")
   for row in cursor:
     if Customer_email == row[1]:
       customer_id = row[0]
@@ -182,8 +175,8 @@ def main():
   action = input("Do you want to reuse, recycle, or check recyclable?")
   New_recycle_entry(action)
 
-  Art_project("bottle",50)
-  Art_project("medium wrapper", 2)
+  Art_project(reusable,50)
+  Art_project(reusable, 2)
   
 if __name__ == "__main__":
   main()
