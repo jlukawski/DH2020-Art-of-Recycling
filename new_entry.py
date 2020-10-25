@@ -5,6 +5,7 @@
 #stores reusable materials
 #are you reusing or recycling
 
+
 class New_recycle_entry:
   def __init__(self):
     self
@@ -19,20 +20,26 @@ class New_recycle_entry:
     if action == 'reuse':
       #store into database, keep track of how many of each item there is
       #store in textfile for now
-      #_ more objects and you can make a ______!
-      obj = input('What object would you like to reuse? ')
-      objCount = 0
-
+      reusables = open('reusables.txt', 'r')
+      lineNum = 0
+      item = input('What object would you like to reuse? ')
+      for num, line in enumerate(reusables, 1):
+        if item in line:
+          lineNum = num
       
-      
-
+    
     
     if action == 'recycle':
       plastic_used = 0
       plastic_check = input("Are you recycling plastic? ")
       if plastic_check == 'yes':
-        object_options= ['small bottle', 'big bottle']
-        obj = input('What object do you wnat to recycle? ')
+        #object_options= ['small bottle', 'big bottle']
+        user_input = input('What object would you like to check? ')
+        recyclables = open('recycle_items.txt')
+
+        print(recyclables.read().split())
+        
+        obj = input('What object do you want to recycle? ')
 
 
     if action == 'check recyclable':
@@ -46,5 +53,3 @@ class New_recycle_entry:
       
   
     
-  def plastic_used(v):
-    return v
