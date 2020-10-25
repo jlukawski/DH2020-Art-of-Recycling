@@ -58,11 +58,6 @@ struct TipsView: View {
     }
 }
 
-struct ItemsView: View {
-    var body: some View {
-        Text("this is items view")
-    }
-}
 
 struct ProjectsView: View {
     var body: some View {
