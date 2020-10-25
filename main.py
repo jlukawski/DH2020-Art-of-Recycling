@@ -5,60 +5,36 @@
 #method to add tips
 #class Recycle_tip:
 #  def __init__():
-class Recycle_tip:
-  def __init__(self):
-    tips = []
-    f = open("Recycling_Tips.txt", "r")
-    line = f.readline()
-    while line:
-      tips.append(line)
-      line = f.readline()
-    f.close()
-    for tip in tips:
-        print(tip)
 
 import sqlite3
 conn = sqlite3.connect('database')
+string = '''CREATE TABLE IF NOT EXISTS Customer
+  (Customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  Email_ID TEXT NOT NULL,
+  Name TEXT NOT NULL);'''
 conn.execute("PRAGMA foreign_keys = ON")
+conn.execute(string)
 
-conn.execute('''CREATE TABLE IF NOT EXISTS Customer
-  (ID INT PRIMARY KEY NOT NULL,
-  Name TEXT NOT NULL);''')
-print("Create Customer table")
-
-conn.execute("INSERT INTO Customer(ID,Name)\
-  VALUES (1, 'Abby')");
-conn.execute("INSERT INTO Customer(ID,Name)\
-  VALUES (2, 'Johnathan')");
-
-conn.execute('''CREATE TABLE Material(
+conn.execute('''CREATE TABLE IF NOT EXISTS Material(
   RecyclingID INT PRIMARY KEY NOT NULL,
-  Type TEXT NOT NULL,
-  Average_weight REAL NOT NULL);''')
-print("Create Material table")
+  Type TEXT NOT NULL);''')
 
-conn.execute("INSERT INTO Material(RecyclingID,Type,Average_weight) \
-  VALUES (20, 'Plastic', 5)");
-
-conn.execute('''CREATE TABLE IF NOT EXISTS Shape(
-  ShapeID INT PRIMARY KEY NOT NULL,
-  Shape TEXT NOT NULL,
-  Average_weight REAL NOT NULL);''')
-print("Create Shape table")
-
-conn.execute("INSERT INTO Shape(ShapeID,Shape,Average_weight) \
-  VALUES (300, 'bottle', 5.5)");
-
-conn.execute('''CREATE TABLE IF NOT EXISTS Recycling_Customer(
+#conn.execute('''CREATE TABLE IF NOT EXISTS Shape(
+#  ShapeID INT PRIMARY KEY NOT NULL,
+#  Shape TEXT NOT NULL,
+#  Average_weight REAL NOT NULL);''')
+#print("Create Shape table")
+string1 = '''CREATE TABLE IF NOT EXISTS Recycling_Customer(
   RecyclingCustomerID INT PRIMARY KEY NOT NULL,
   Customer_id INT,
   Material_id INT,
   Quantity INT NOT NULL,
-  Shape_id INT,
-  FOREIGN KEY(Customer_id) REFERENCES Customer(CustomerID),  
-  FOREIGN KEY(Material_id) REFERENCES Material(RecyclingID),
-  FOREIGN KEY(Shape_id) REFERENCES Shape(ShapeID));''')
-conn.close()
+  TOTAL INT NOT NULL,
+  PREVIOUS_TOTAL INT,
+  FOREIGN KEY(Customer_id) REFERENCES Customer(Customer_id),  
+  FOREIGN KEY(Material_id) REFERENCES Material(RecyclingID));'''
+conn.execute(string1)
+conn.commit
  
 #store amount of reusable materials
 #import new_recycle_entry to get the amount of reusable items
@@ -100,7 +76,16 @@ class Art_project:
 #import Art_project
 #import New_recycle_entry
 def main():
-  Recycle_tip()
+  Customer_email = input()
+  Name = input()
+  string3= "SELECT customer_id, email_ID, Name from Customer where email_ID = " + Customer_email
+  print(string3)
+  cursor = conn.execute(string3)
+  result = cursor.fetchone()
+  print(result)
+  if result == 0:
+    conn.execute("INSERT INTO Customer(email_ID,Name) \ VALUES ("+ Customer_email + ", " + Name +")");
+      
   Art_project("bottle",50)
   Art_project("medium wrapper", 2)
   
