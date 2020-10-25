@@ -48,22 +48,35 @@ struct ContentView_Previews: PreviewProvider {
 
 struct TipsView: View {
     var body: some View {
-        List{
-            TipRow(name: "Wash your recyclables", description: "Items that are dirty cannot be recycled. Please wash your recycleable items. If it's not clean, empty, and dry, do not recycle!")
-            TipRow(name: "Seperate your materials", description: "If it containes two or more materials(such as paper and plastic), it is not recyclable.")
-            TipRow(name: "Look at the number", description: "The lower the recycling code is, the more recyclable. Typically, recylcing centers are equipped to recycle items with a code of one or two.")
-            TipRow(name: "Don't recycle small items", description: "Do not recycle anything smaller than a credit card. Small recyclables can clog the machines.")
-            TipRow(name: "Don't put in plastic bags", description: "Do not put plastic bags into your home's recycling. They will clog up the recycling machine. This includes bags that are used to hold other recyclables. Everything in that bag will be considered trash. If you have grocery bags check your local grocery store for a recylcing bin where they can be disposed of.")
-        }
+            List{
+                TipRow(name: "Wash your recyclables", description: "Items that are dirty cannot be recycled. Please wash your recycleable items. If it's not clean, empty, and dry, do not recycle!")
+                TipRow(name: "Seperate your materials", description: "If it containes two or more materials(such as paper and plastic), it is not recyclable.")
+                TipRow(name: "Look at the number", description: "The lower the recycling code is, the more recyclable. Typically, recylcing centers are equipped to recycle items with a code of one or two.")
+                TipRow(name: "Don't recycle small items", description: "Do not recycle anything smaller than a credit card. Small recyclables can clog the machines.")
+                TipRow(name: "Don't put in plastic bags", description: "Do not put plastic bags into your home's recycling. They will clog up the recycling machine. This includes bags that are used to hold other recyclables. Everything in that bag will be considered trash. If you have grocery bags check your local grocery store for a recylcing bin where they can be disposed of.")
+            }
+        
     }
 }
 
 
 struct ProjectsView: View {
+    var projects: [ProjectRow] = [
+        ProjectRow(image: "plasticbagdress", name: "Plastic bag dress", description: "Dress made from plastic bags"),
+        ProjectRow(image: "candywrapperpencilpouch", name: "Candy wrapper pencil pouch", description: "Pencil pouch made from candy wrappers")
+    ]
+    
     var body: some View {
-        List{
-            ProjectRow(image: "plasticbagdress", name: "Plastic bag dress", description: "Dress made from plastic bags")
-            ProjectRow(image: "candywrapperpencilpouch", name: "Candy wrapper pencil pouch", description: "Pencil pouch made from candy wrappers")
+        NavigationView{
+            List(){
+                NavigationLink(destination: WebView(url: "https://www.redtedart.com/simple-bug-hotel-for-kids/")) {
+                    ProjectRow(image: "plasticbagdress", name: "Plastic bag dress", description: "Dress made from plastic bags")
+                }.buttonStyle(PlainButtonStyle())
+                NavigationLink(destination: WebView(url: "https://youtu.be/9zx_QcApUug")) {
+                    ProjectRow(image: "plasticbagdress", name: "Plastic bag dress", description: "Dress made from plastic bags")
+                }.buttonStyle(PlainButtonStyle())
+            }.navigationBarTitle(Text("Art Projects"))
         }
     }
+    
 }

@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ProjectRow: View {
-    
     var image: String
     var name: String
     var description: String

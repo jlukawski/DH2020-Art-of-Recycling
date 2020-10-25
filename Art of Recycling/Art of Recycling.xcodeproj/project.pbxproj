@@ -18,6 +18,7 @@
 		410A81302544EA2B00D32262 /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A812F2544EA2B00D32262 /* ItemsView.swift */; };
 		410A81322545033500D32262 /* ProjectDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A81312545033500D32262 /* ProjectDetail.swift */; };
 		410A8134254506CF00D32262 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A8133254506CF00D32262 /* Browser.swift */; };
+		410A813C254536D400D32262 /* dsfhjkfhdlkajfh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410A813B254536D400D32262 /* dsfhjkfhdlkajfh.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		410A812F2544EA2B00D32262 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		410A81312545033500D32262 /* ProjectDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetail.swift; sourceTree = "<group>"; };
 		410A8133254506CF00D32262 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
+		410A813B254536D400D32262 /* dsfhjkfhdlkajfh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dsfhjkfhdlkajfh.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				410A81042544B77600D32262 /* SceneDelegate.swift */,
 				410A812D2544CF3100D32262 /* TipRow.swift */,
 				410A81062544B77600D32262 /* ContentView.swift */,
+				410A813B254536D400D32262 /* dsfhjkfhdlkajfh.swift */,
 				410A812F2544EA2B00D32262 /* ItemsView.swift */,
 				410A81082544B77A00D32262 /* Assets.xcassets */,
 				410A810D2544B77A00D32262 /* LaunchScreen.storyboard */,
@@ -164,6 +167,7 @@
 				410A81032544B77600D32262 /* AppDelegate.swift in Sources */,
 				410A81302544EA2B00D32262 /* ItemsView.swift in Sources */,
 				410A81052544B77600D32262 /* SceneDelegate.swift in Sources */,
+				410A813C254536D400D32262 /* dsfhjkfhdlkajfh.swift in Sources */,
 				410A81322545033500D32262 /* ProjectDetail.swift in Sources */,
 				410A8134254506CF00D32262 /* Browser.swift in Sources */,
 				410A812E2544CF3100D32262 /* TipRow.swift in Sources */,

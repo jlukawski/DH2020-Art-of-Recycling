@@ -15,7 +15,7 @@ struct ProjectDetail: View {
                 
             }){
                 Text("I made it!")
-                    .background(Color.purple)
+                    .padding()
             }
             WebView(url: "https://www.google.com")
         }
