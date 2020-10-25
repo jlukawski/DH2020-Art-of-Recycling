@@ -26,24 +26,12 @@ string = '''CREATE TABLE IF NOT EXISTS Customer
 conn.execute("PRAGMA foreign_keys = ON")
 conn.execute(string)
 
-conn.execute('''CREATE TABLE IF NOT EXISTS Material(
-  RecyclingID INT PRIMARY KEY NOT NULL,
-  Type TEXT NOT NULL);''')
-
-#conn.execute('''CREATE TABLE IF NOT EXISTS Shape(
-#  ShapeID INT PRIMARY KEY NOT NULL,
-#  Shape TEXT NOT NULL,
-#  Average_weight REAL NOT NULL);''')
-#print("Create Shape table")
 string1 = '''CREATE TABLE IF NOT EXISTS Recycling_Customer(
-  RecyclingCustomerID INT PRIMARY KEY NOT NULL,
+  RecyclingCustomerID INTEGER PRIMARY KEY AUTOINCREMENT,
   Customer_id INT,
-  Material_id INT,
-  Quantity INT NOT NULL,
   TOTAL INT NOT NULL,
   PREVIOUS_TOTAL INT,
-  FOREIGN KEY(Customer_id) REFERENCES Customer(Customer_id),  
-  FOREIGN KEY(Material_id) REFERENCES Material(RecyclingID));'''
+  FOREIGN KEY(Customer_id) REFERENCES Customer(Customer_id));'''
 conn.execute(string1)
 conn.commit
  
@@ -65,9 +53,13 @@ class Art_project:
 
 
 class New_recycle_entry:
-  global reusable
+  global reusable,total
   def __init__(self,action):
     user =0
+    plastic_total = 0
+    aluminum_total = 0
+    cardboard_total = 0
+    glass_total = 0
     while user != 5:
       print("1: aluminum")
       print("2: cardboard")
@@ -130,6 +122,16 @@ class New_recycle_entry:
             reusable[8][2] +=1
           else:
             print("not possible")
+    for i in range(0,len(reusable)):
+      if reusable[i][0] == "aluminum":
+        aluminum_total += reusable[i][2]
+      elif reusable[i][0] == "cardboard":
+        cardboard_total += reusable[i][2]
+      elif reusable[i][0] == "glass":
+        glass_total += reusable[i][2]
+      elif reusable[i][0] == "plastic":
+        plastic_total += reusable[i][2]
+    total = plastic_total + aluminum_total + cardboard_total + glass_total
 
     if action == 'recycle':
       check = 0
@@ -140,26 +142,17 @@ class New_recycle_entry:
         print("4: plastic")
         print("5: cancel")
         check = input("What are you recycling? ")
-        plastic_total = 0
-        aluminum_total = 0
-        cardboard_total = 0
-        glass_total = 0
-        total = 0
+        
         if check == 1:
-          for i in range(0,len(reusable)):
-            if reusable[i][0] == "aluminum":
-              aluminum_total += reusable[i][2]
-            elif reusable[i][0] == "cardboard":
-              cardboard_total += reusable[i][2]
-            elif reusable[i][0] == "glass":
-              glass_total += reusable[i][2]
-            elif reusable[i][0] == "plastic":
-              plastic_total += reusable[i][2]   
-      total = plastic_total + aluminum_total + cardboard_total + glass_total
-      print("The total plasic you recycle is " + str(plastic_total))
-      print("The total aluminum you recycle is " + str(aluminum_total))
-      print("The total cardboard you recycle is " + str(cardboard_total))
-      print("The total glass you recycle is " + str(glass_total))
+          print("The total aluminum you recycle is " + str(aluminum_total))
+        elif check == 2:
+          print("The total cardboard you recycle is " + str(cardboard_total))  
+        elif check == 3:
+          print("The total glass you recycle is " + str(glass_total))  
+        elif check == 4:
+          print("The total plasic you recycle is " + str(plastic_total))  
+        else:
+          break;   
       print("The combined total: " + str(total))
     
     if action == 'check recyclable':
@@ -172,6 +165,7 @@ class New_recycle_entry:
         print("You cannot recycle this item")
 
 reusable = [["plastic", "wrapper", 0],["plastic", "bag", 0], ["plastic", "bottle", 0], ["plastic", "carton", 0], ["plastic", "utensil", 0], ["aluminum", "can", 0], ["glass", "jar", 0], ["glass", "bottle", 0], ["cardboard", "box", 0]]  
+total = 0
 def main():
   Customer_email = str(input())
   Name = input()
@@ -182,10 +176,18 @@ def main():
       break;
     else:  
       conn.execute("INSERT INTO Customer(email_ID,Name) \ VALUES ("+ Customer_email + ", " + Name +")");
+      conn.execute("INSERT INTO RecyclingCustomerID(TOTAL,PREVIOUS_TOTAL) \ VALUES (0,0)");
   
   action = input("Do you want to reuse, recycle, or check recyclable? ")
   New_recycle_entry(action)
+  cursor = conn.execute("SELECT RecyclingCustomerID, Customer_id, TOTAL, PREVIOUS_TOTAL from Recycling_Customer")
 
+  for row in cursor:
+    if customer_id == row[1]:
+      conn.execute("Recycling_Customer[PREVIOUS_TOTAL] = Recycling_Customer[TOTAL]")
+      conn.execute("Recycling_Customer[TOTAL] = "+total+"")
+      break;
+  
   Art_project(reusable)
   
 if __name__ == "__main__":
