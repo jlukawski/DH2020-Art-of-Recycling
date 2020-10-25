@@ -11,14 +11,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView{
-            TipsView()
-                .tabItem{
-                    VStack{
-                        Image(systemName: "heart")
-                        Text("Tips")
-                    }
-            }
-            .tag(0)
+
             ItemsView()
                 .tabItem{
                     VStack{
@@ -26,12 +19,20 @@ struct ContentView: View {
                         Text("Items")
                     }
             }
-            .tag(1)
+            .tag(0)
             ProjectsView()
                 .tabItem{
                     VStack{
                         Image(systemName: "rectangle.and.paperclip")
                         Text("Projects")
+                    }
+            }
+            .tag(1)
+            TipsView()
+                .tabItem{
+                    VStack{
+                        Image(systemName: "heart")
+                        Text("Tips")
                     }
             }
             .tag(2)
